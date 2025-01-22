@@ -28,7 +28,6 @@ async function checkWeb() {
 
         if (!lastVersion) {
             lastVersion = content;
-            console.log(content);
         } else if (lastVersion !== content) {
             lastVersion = content;
             sendEmail();
