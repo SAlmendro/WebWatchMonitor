@@ -1,0 +1,15 @@
+{
+  "name": "webwatchmonitor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webwatchmonitor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sergio Almendro Cerdá",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}
