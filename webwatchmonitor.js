@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer');
 
 let url; 
-let receiver;
+let nReceivers;
+let receivers;
 let sender;
 let appPassword;
 let seconds;
@@ -62,8 +63,11 @@ function sendEmail() {
 
 async function main() {
     url = await askUser("Enter the URL of the website you wish to monitor: ");
-    seconds = await askUser("Enter how often you want to monitor the website (in seconds): ")
-    receiver = await askUser("Enter the recipient's email address: ");
+    seconds = await askUser("Enter how often you want to monitor the website (in seconds): ");
+    nReceivers = await askUser("Enter the number of receivers you want to send the updates: ");
+    for (let i = 1; i <= nReceivers; i++) {
+        receiver = await askUser("Enter the #" + i + " recipient's email address: ");
+    }
     sender = await askUser("Enter the sender's email address (Gmail): ");
     appPassword = await askUser("Enter your Gmail application password: ");
     rl.close();
