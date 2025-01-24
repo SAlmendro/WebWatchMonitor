@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const notifier = require('node-notifier');
 
 let url; 
 let nReceivers;
@@ -50,6 +51,11 @@ function sendEmail() {
                 user: sender,
                 pass: appPassword
             }
+        });
+        notifier.notify({
+            title: 'The web changed!',
+            message: 'Go see it!',
+            sound: true
         });
         receivers.forEach(async receiver => {
             await transporter.sendMail({
