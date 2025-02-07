@@ -32,7 +32,7 @@ async function checkWeb() {
             lastVersion = content;
         } else if (lastVersion !== content) {
             lastVersion = content;
-            sendEmail();
+            sendEmail(true);
             console.log(`The content has changed - ${currentTime}`);
         } else {
             console.log(`The content remains the same - ${currentTime}`);
@@ -42,8 +42,7 @@ async function checkWeb() {
     }
 }
 
-function sendEmail() {
-    console.log('Changes detected, sending mail...');
+function sendEmail(changed) {
     (async () => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -52,19 +51,31 @@ function sendEmail() {
                 pass: appPassword
             }
         });
-        notifier.notify({
-            title: 'The web changed!',
-            message: 'Go see it!',
-            sound: true
-        });
-        receivers.forEach(async receiver => {
-            await transporter.sendMail({
-                from: sender,
-                to: receiver,
-                subject: 'Changes detected in the web!',
-                text: 'The web has changed! Run! Go see it: ' + url
+        if (changed) {
+            console.log('Changes detected, sending mail...');
+            notifier.notify({
+                title: 'The web changed!',
+                message: 'Go see it!',
+                sound: true
             });
-        });
+            receivers.forEach(async receiver => {
+                await transporter.sendMail({
+                    from: sender,
+                    to: receiver,
+                    subject: 'Changes detected in the web!',
+                    text: 'The web has changed! Run! Go see it: ' + url
+                });
+            });
+        } else {
+            receivers.forEach(async receiver => {
+                await transporter.sendMail({
+                    from: sender,
+                    to: receiver,
+                    subject: "Web monitoring subscription",
+                    text: "You've been subscribed to the changes in this web: " + url
+                });
+            });
+        }
     })();
 }
 
@@ -81,6 +92,7 @@ async function main() {
     rl.close();
 
     console.log("Starting web monitoring...");
+    sendEmail(false);
     checkWeb();
     setInterval(checkWeb, seconds*1000);
 }
