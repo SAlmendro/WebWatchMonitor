@@ -104,16 +104,15 @@ async function sendEmail(changed) {
             );
         });
     } else {
-        receivers.forEach(receiver => {
-            emailPromises.push(
-                transporter.sendMail({
-                    from: sender,
-                    to: receiver,
-                    subject: "Web monitoring subscription",
-                    text: "You've been subscribed to the changes in this web: " + url
-                })
-            );
-        });
+        let firstReceiver = receivers[0];
+        emailPromises.push(
+            transporter.sendMail({
+                from: sender,
+                to: firstReceiver,
+                subject: "Web monitoring subscription",
+                text: "You've been subscribed to the changes in this web: " + url
+            })
+        );
     }
 
     return Promise.all(emailPromises);
