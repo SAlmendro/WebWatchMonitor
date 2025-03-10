@@ -11,6 +11,7 @@ Clone the repository and run the command:
 
 ```
 npm install
+npx puppeteer browsers install chrome
 ```
 
 

@@ -1,6 +1,7 @@
 {
   "name": "webwatchmonitor",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "webwatchmonitor.js",
   "scripts": {
@@ -10,7 +11,11 @@
   "author": "Sergio Almendro Cerdá",
   "license": "ISC",
   "dependencies": {
+    "fs": "^0.0.1-security",
+    "node-notifier": "^10.0.1",
     "nodemailer": "^6.9.16",
-    "node-notifier": "^10.0.1"
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0",
+    "puppeteer": "^24.2.1"
   }
 }

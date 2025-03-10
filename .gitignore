@@ -129,4 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+screenshot_old.png
+screenshot_new.png
+diff.png
+
 consts
